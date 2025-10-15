@@ -29,6 +29,4 @@
 - URL: https://archetypeconsulting.com/
 - What I like: Animated visual in the hero section
 
-test
-
 --
