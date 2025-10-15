@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+
+# Production
+/build
+/dist
+.next/
+out/
+
+# Misc
+.DS_Store
+*.log
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# Backups
+_backup/
+
+# Playwright screenshots (optional - you might want to commit these)
+.playwright-mcp/
+
+# OS
+Thumbs.db

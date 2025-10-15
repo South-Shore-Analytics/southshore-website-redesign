@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>South Shore Analytics - Data Blueprint Methodology</title>
+    <meta name="description" content="Expert analytics guidance at prices that make sense. Systematic approach to data transformation.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'blueprint': '#F5F3EC',
+                        'blueprint-dark': '#E8E4D6',
+                        'navy': '#0A4B78',
+                        'navy-dark': '#063552',
+                        'accent-gold': '#F4A623',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        mono: ['ui-monospace', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* === BLUEPRINT AESTHETIC === */
+
+        body {
+            background-color: #F5F3EC;
+        }
+
+        /* Grid pattern overlay */
+        .blueprint-grid {
+            background-image:
+                linear-gradient(rgba(10, 75, 120, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(10, 75, 120, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Document-style header */
+        .document-header {
+            border-bottom: 2px solid #0A4B78;
+            font-family: 'Inter', monospace;
+        }
+
+        /* Subtle pulse animation for lighthouse badge */
+        @keyframes pulse-subtle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(0.98); }
+        }
+
+        .lighthouse-badge {
+            animation: pulse-subtle 4s ease-in-out infinite;
+        }
+
+        /* Data flow lines */
+        @keyframes flow-right {
+            0% { stroke-dashoffset: 100; }
+            100% { stroke-dashoffset: 0; }
+        }
+
+        .data-flow-line {
+            stroke-dasharray: 5 5;
+            animation: flow-right 2s linear infinite;
+        }
+
+        /* Numbered section badges */
+        .section-number {
+            font-family: 'Inter', monospace;
+            font-weight: 600;
+            color: #0A4B78;
+            border: 2px solid #0A4B78;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Technical card style */
+        .tech-card {
+            border: 1px solid #0A4B78;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 4px 4px 0 #0A4B78;
+        }
+
+        /* Scroll reveal */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .scroll-reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .lighthouse-badge,
+            .data-flow-line {
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <!-- Document-Style Header -->
+    <div class="bg-white py-3 px-4 document-header text-xs font-mono text-navy">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <span>Document A</span>
+            <span>10.14.2025</span>
+            <span>South Shore Analytics</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-blueprint sticky top-0 z-50 border-b border-navy/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-14">
+                <div class="flex items-center space-x-3">
+                    <img src="../../assets/logo/SSA Logo.png" alt="South Shore Analytics" class="h-8 w-8 lighthouse-badge">
+                    <span class="font-semibold text-navy">South Shore Analytics</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-6 text-sm">
+                    <a href="#methodology" class="text-gray-700 hover:text-navy font-medium transition">Methodology</a>
+                    <a href="#services" class="text-gray-700 hover:text-navy font-medium transition">Services</a>
+                    <a href="#contact" class="text-gray-700 hover:text-navy font-medium transition">Contact</a>
+                    <a href="#contact" class="bg-navy hover:bg-navy-dark text-white px-4 py-2 text-sm font-semibold transition">
+                        Request Access
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section - Blueprint Style -->
+    <section class="min-h-[50vh] py-16 blueprint-grid">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Content -->
+                <div>
+                    <div class="section-number mb-6">01. INTRODUCTION</div>
+
+                    <h1 class="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                        Data Blueprint<br/>
+                        Methodology
+                    </h1>
+
+                    <p class="text-xl text-gray-700 mb-8 max-w-xl leading-relaxed">
+                        A systematic approach to transforming data chaos into clarity. Precision analytics engineering for businesses seeking measurable outcomes.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                        <a href="#contact" class="inline-block bg-navy hover:bg-navy-dark text-white px-6 py-3 font-semibold transition">
+                            Schedule Assessment →
+                        </a>
+                        <a href="#methodology" class="inline-block border-2 border-navy text-navy hover:bg-navy hover:text-white px-6 py-3 font-semibold transition">
+                            View Methodology
+                        </a>
+                    </div>
+
+                    <!-- Specs -->
+                    <div class="border-l-2 border-navy pl-4 space-y-1 text-sm font-mono text-gray-600">
+                        <div>Experience: 10+ years</div>
+                        <div>Clients: 100+ served</div>
+                        <div>Success Rate: 95%+</div>
+                        <div>Location: Chicago, IL (Nationwide)</div>
+                    </div>
+                </div>
+
+                <!-- Right: Lighthouse Badge + Technical Diagram -->
+                <div class="relative">
+                    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-md mx-auto">
+                        <!-- Grid background -->
+                        <defs>
+                            <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#0A4B78" stroke-width="0.5" opacity="0.1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="400" height="400" fill="url(#grid)"/>
+
+                        <!-- Center: Lighthouse Icon/Badge -->
+                        <g transform="translate(200, 200)">
+                            <!-- Circular badge -->
+                            <circle cx="0" cy="0" r="80" fill="white" stroke="#0A4B78" stroke-width="3"/>
+
+                            <!-- Lighthouse -->
+                            <g transform="translate(0, 10)">
+                                <!-- Base -->
+                                <rect x="-12" y="25" width="24" height="15" fill="#0A4B78"/>
+                                <!-- Tower -->
+                                <path d="M-10,25 L-8,-15 L8,-15 L10,25 Z" fill="#0A4B78"/>
+                                <!-- Light -->
+                                <rect x="-10" y="-20" width="20" height="8" fill="#F4A623"/>
+                                <!-- Roof -->
+                                <path d="M-12,-20 L0,-28 L12,-20 Z" fill="#EF4444"/>
+                            </g>
+
+                            <!-- Label -->
+                            <text y="70" text-anchor="middle" font-size="12" fill="#0A4B78" font-weight="600">DATA GUIDANCE</text>
+                        </g>
+
+                        <!-- Data flow connections -->
+                        <line x1="100" y1="100" x2="140" y2="140" stroke="#0A4B78" stroke-width="1" class="data-flow-line"/>
+                        <line x1="300" y1="100" x2="260" y2="140" stroke="#0A4B78" stroke-width="1" class="data-flow-line"/>
+                        <line x1="300" y1="300" x2="260" y2="260" stroke="#0A4B78" stroke-width="1" class="data-flow-line"/>
+                        <line x1="100" y1="300" x2="140" y2="260" stroke="#0A4B78" stroke-width="1" class="data-flow-line"/>
+
+                        <!-- Corner labels -->
+                        <g transform="translate(100, 100)">
+                            <circle cx="0" cy="0" r="20" fill="white" stroke="#0A4B78" stroke-width="2"/>
+                            <text y="5" text-anchor="middle" font-size="10" fill="#0A4B78" font-weight="600">DATA</text>
+                        </g>
+
+                        <g transform="translate(300, 100)">
+                            <circle cx="0" cy="0" r="20" fill="white" stroke="#0A4B78" stroke-width="2"/>
+                            <text y="5" text-anchor="middle" font-size="10" fill="#0A4B78" font-weight="600">PIPE</text>
+                        </g>
+
+                        <g transform="translate(300, 300)">
+                            <circle cx="0" cy="0" r="20" fill="white" stroke="#0A4B78" stroke-width="2"/>
+                            <text y="5" text-anchor="middle" font-size="10" fill="#0A4B78" font-weight="600">DASH</text>
+                        </g>
+
+                        <g transform="translate(100, 300)">
+                            <circle cx="0" cy="0" r="20" fill="white" stroke="#0A4B78" stroke-width="2"/>
+                            <text y="5" text-anchor="middle" font-size="10" fill="#0A4B78" font-weight="600">INSIGHT</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Section -->
+    <section id="methodology" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 scroll-reveal">
+                <div class="section-number mb-4">02. METHODOLOGY</div>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    The Data Pipeline
+                </h2>
+                <p class="text-lg text-gray-600 max-w-3xl">
+                    A proven 5-stage process from raw data to actionable insights
+                </p>
+            </div>
+
+            <!-- Process Steps -->
+            <div class="space-y-8">
+                <!-- Step 1 -->
+                <div class="tech-card p-6 scroll-reveal flex items-start gap-6">
+                    <div class="w-12 h-12 bg-navy text-white rounded flex items-center justify-center font-bold text-xl flex-shrink-0">
+                        1
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Data Collection</h3>
+                        <p class="text-gray-600 mb-3">Identify and access all relevant data sources across your organization</p>
+                        <div class="font-mono text-xs text-gray-500">Sources → APIs, Databases, SaaS Tools, Files</div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="tech-card p-6 scroll-reveal flex items-start gap-6" style="transition-delay: 0.1s">
+                    <div class="w-12 h-12 bg-navy text-white rounded flex items-center justify-center font-bold text-xl flex-shrink-0">
+                        2
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Ingestion Pipeline</h3>
+                        <p class="text-gray-600 mb-3">Build automated, reliable pipelines to move data into your warehouse</p>
+                        <div class="font-mono text-xs text-gray-500">Pipeline → Airbyte, Fivetran, Custom ETL</div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="tech-card p-6 scroll-reveal flex items-start gap-6" style="transition-delay: 0.2s">
+                    <div class="w-12 h-12 bg-navy text-white rounded flex items-center justify-center font-bold text-xl flex-shrink-0">
+                        3
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Storage Layer</h3>
+                        <p class="text-gray-600 mb-3">Organize data in scalable, cost-effective cloud warehouses</p>
+                        <div class="font-mono text-xs text-gray-500">Warehouse → Snowflake, BigQuery, AWS Redshift</div>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="tech-card p-6 scroll-reveal flex items-start gap-6" style="transition-delay: 0.3s">
+                    <div class="w-12 h-12 bg-navy text-white rounded flex items-center justify-center font-bold text-xl flex-shrink-0">
+                        4
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Transformation</h3>
+                        <p class="text-gray-600 mb-3">Model data for business logic, KPIs, and analytical workflows</p>
+                        <div class="font-mono text-xs text-gray-500">Modeling → dbt, SQL, Python</div>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="tech-card p-6 scroll-reveal flex items-start gap-6" style="transition-delay: 0.4s">
+                    <div class="w-12 h-12 bg-accent-gold text-white rounded flex items-center justify-center font-bold text-xl flex-shrink-0">
+                        5
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-2">Visualization</h3>
+                        <p class="text-gray-600 mb-3">Deploy dashboards and automated reports for stakeholders</p>
+                        <div class="font-mono text-xs text-gray-500">Dashboard → Metabase, Looker, Tableau, Omni</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 blueprint-grid">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 scroll-reveal">
+                <div class="section-number mb-4">03. CAPABILITIES</div>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    What We Build
+                </h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Service 1 -->
+                <div class="tech-card p-8 scroll-reveal">
+                    <div class="font-mono text-xs text-navy mb-3">3.1 DATA INFRASTRUCTURE</div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">End-to-End Pipelines</h3>
+                    <p class="text-gray-600 mb-4">
+                        From raw sources to production dashboards, we architect the full stack
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Cloud warehouse setup (Snowflake, BigQuery)</li>
+                        <li>• ETL/ELT pipeline engineering</li>
+                        <li>• Data modeling with dbt</li>
+                        <li>• Automated monitoring & alerts</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="tech-card p-8 scroll-reveal" style="transition-delay: 0.1s">
+                    <div class="font-mono text-xs text-navy mb-3">3.2 ANALYTICS DASHBOARDS</div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Executive Reporting</h3>
+                    <p class="text-gray-600 mb-4">
+                        Custom dashboards that answer your most critical business questions
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• KPI tracking & visualization</li>
+                        <li>• Self-service BI for teams</li>
+                        <li>• Automated email reports</li>
+                        <li>• Mobile-responsive design</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="tech-card p-8 scroll-reveal" style="transition-delay: 0.2s">
+                    <div class="font-mono text-xs text-navy mb-3">3.3 CONSULTING & STRATEGY</div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Data Roadmapping</h3>
+                    <p class="text-gray-600 mb-4">
+                        Strategic guidance to align analytics with business objectives
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Data maturity assessment</li>
+                        <li>• Technology stack recommendations</li>
+                        <li>• Team training & enablement</li>
+                        <li>• Governance best practices</li>
+                    </ul>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="tech-card p-8 scroll-reveal" style="transition-delay: 0.3s">
+                    <div class="font-mono text-xs text-navy mb-3">3.4 ANALYTICS ENGINEERING</div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Custom Solutions</h3>
+                    <p class="text-gray-600 mb-4">
+                        Bespoke analytics projects tailored to your unique needs
+                    </p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>• Product analytics implementation</li>
+                        <li>• Customer lifetime value (LTV) models</li>
+                        <li>• Forecasting & predictive analytics</li>
+                        <li>• Data science prototyping</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial -->
+    <section class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="tech-card p-12 scroll-reveal">
+                <div class="font-mono text-xs text-navy mb-4">04. CLIENT FEEDBACK</div>
+
+                <div class="flex gap-2 mb-6">
+                    <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                    <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                    <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                    <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                    <div class="w-2 h-2 bg-accent-gold rounded-full"></div>
+                </div>
+
+                <blockquote class="text-2xl font-medium text-gray-900 mb-6 leading-relaxed">
+                    "SSA was instrumental in both defining and building our analytics infrastructure. This enabled us to successfully raise a $27mm Series A and provide our leadership team with the ongoing visibility we need on key KPIs."
+                </blockquote>
+
+                <div class="border-t border-navy/20 pt-6">
+                    <div class="font-semibold text-gray-900">CEO, High Growth Technology Start Up</div>
+                    <div class="text-sm text-gray-600 mt-1">Series A Fundraising • $27M Raised</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="py-16 blueprint-grid">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="tech-card p-6 text-center scroll-reveal">
+                    <div class="text-4xl font-bold text-navy mb-2">10+</div>
+                    <div class="text-sm text-gray-600 font-mono">Years</div>
+                </div>
+                <div class="tech-card p-6 text-center scroll-reveal" style="transition-delay: 0.1s">
+                    <div class="text-4xl font-bold text-navy mb-2">100+</div>
+                    <div class="text-sm text-gray-600 font-mono">Clients</div>
+                </div>
+                <div class="tech-card p-6 text-center scroll-reveal" style="transition-delay: 0.2s">
+                    <div class="text-4xl font-bold text-accent-gold mb-2">$100K+</div>
+                    <div class="text-sm text-gray-600 font-mono">ARR Retained</div>
+                </div>
+                <div class="tech-card p-6 text-center scroll-reveal" style="transition-delay: 0.3s">
+                    <div class="text-4xl font-bold text-accent-gold mb-2">$27M</div>
+                    <div class="text-sm text-gray-600 font-mono">Series A</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-12 scroll-reveal">
+                <div class="section-number mb-4">05. REQUEST ACCESS</div>
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Schedule Assessment
+                </h2>
+                <p class="text-lg text-gray-600">
+                    30-minute consultation • No commitment required • Actionable insights provided
+                </p>
+            </div>
+
+            <form class="tech-card p-8 scroll-reveal">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 font-mono text-xs mb-2 uppercase" for="name3">Name *</label>
+                        <input type="text" id="name3" required class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-navy text-gray-900">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-mono text-xs mb-2 uppercase" for="email3">Email *</label>
+                        <input type="email" id="email3" required class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-navy text-gray-900">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 font-mono text-xs mb-2 uppercase" for="phone3">Phone</label>
+                        <input type="tel" id="phone3" class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-navy text-gray-900">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-mono text-xs mb-2 uppercase" for="company3">Company *</label>
+                        <input type="text" id="company3" required class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-navy text-gray-900">
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-mono text-xs mb-2 uppercase" for="message3">Project Brief *</label>
+                    <textarea id="message3" required rows="5" class="w-full px-4 py-3 border border-gray-300 focus:outline-none focus:border-navy text-gray-900"></textarea>
+                </div>
+
+                <button type="submit" class="w-full bg-navy hover:bg-navy-dark text-white px-8 py-4 font-bold transition">
+                    SUBMIT REQUEST →
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 font-mono text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <img src="../../assets/logo/SSA Logo.png" alt="South Shore Analytics" class="h-8 w-8">
+                        <span class="ml-3 font-semibold">SSA</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Data Blueprint Methodology
+                    </p>
+                </div>
+
+                <div>
+                    <div class="font-semibold mb-4">SERVICES</div>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#methodology" class="hover:text-white transition">Methodology</a></li>
+                        <li><a href="#services" class="hover:text-white transition">Capabilities</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="font-semibold mb-4">COMPANY</div>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="hover:text-white transition">Case Studies</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="font-semibold mb-4">LOCATION</div>
+                    <p class="text-gray-400">Chicago, IL</p>
+                    <p class="text-gray-400">Nationwide Service</p>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 South Shore Analytics • All rights reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Scroll reveal
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
