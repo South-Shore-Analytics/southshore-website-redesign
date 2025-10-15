@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>South Shore Analytics | From Data Chaos to Crystal Clarity</title>
+    <meta name="description" content="Premium analytics expertise at prices that make sense. Guide your data from chaos to clarity.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Teal Monochromatic Palette (inspired by operate.so's green) */
+        :root {
+            --bg-teal: #C8DDD5;
+            --medium-teal: #7DB5A4;
+            --dark-teal: #1B5B6B;
+            --accent-teal: #5C9A8B;
+            --text-dark: #1B5B6B;
+            --white: #FFFFFF;
+            --grid-color: rgba(27, 91, 107, 0.12);
+        }
+
+        /* Full-screen hero with monochromatic background */
+        .hero-operate-style {
+            background: linear-gradient(135deg, #D4E6DF 0%, #C8DDD5 50%, #BED9CE 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Technical grid overlay */
+        .technical-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        /* Side labels (vertical text) */
+        .side-label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            color: var(--dark-teal);
+            text-transform: uppercase;
+        }
+
+        .side-label-left {
+            left: 20px;
+        }
+
+        .side-label-right {
+            right: 20px;
+        }
+
+        /* Header document label (top-left) */
+        .document-label {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            font-size: 0.7rem;
+            color: var(--dark-teal);
+            opacity: 0.7;
+            line-height: 1.8;
+        }
+
+        /* Animated data points container */
+        .data-points-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 1400px;
+            height: 400px;
+        }
+
+        /* Individual data point (circle) */
+        .data-point {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid var(--dark-teal);
+            background: transparent;
+            transition: all 3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Chaos state: scattered on left */
+        .chaos .data-point {
+            opacity: 0.8;
+        }
+
+        /* Clarity state: organized on right */
+        .clarity .data-point {
+            opacity: 1;
+        }
+
+        /* Decorative asterisks and symbols */
+        .decorative-symbol {
+            position: absolute;
+            font-size: 1.5rem;
+            color: var(--accent-teal);
+            opacity: 0.4;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Squiggly decorative lines */
+        .squiggle {
+            position: absolute;
+            stroke: var(--accent-teal);
+            opacity: 0.3;
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Hero content overlay (centered) */
+        .hero-content-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 3rem 4rem;
+            border-radius: 20px;
+            border: 2px solid var(--dark-teal);
+            max-width: 90%;
+        }
+
+        /* Timeline scrubber (bottom) */
+        .timeline-scrubber {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .timeline-track {
+            flex: 1;
+            height: 2px;
+            background: var(--dark-teal);
+            position: relative;
+            border-radius: 2px;
+        }
+
+        .timeline-progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: var(--accent-teal);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .timeline-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--dark-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .timeline-bracket {
+            font-size: 1.5rem;
+            color: var(--dark-teal);
+            font-weight: 300;
+        }
+
+        /* Play/Pause button */
+        .control-button {
+            background: var(--white);
+            border: 2px solid var(--dark-teal);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-button:hover {
+            background: var(--dark-teal);
+            color: var(--white);
+        }
+
+        /* Button styles */
+        .btn-primary {
+            background-color: var(--dark-teal);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-size: 1rem;
+            border: 2px solid var(--dark-teal);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-teal);
+            border-color: var(--accent-teal);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(27, 91, 107, 0.2);
+        }
+
+        /* Top header badge */
+        .alpha-badge {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--dark-teal);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--dark-teal);
+            border-radius: 50%;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-content-overlay {
+                padding: 2rem;
+            }
+
+            .side-label {
+                font-size: 0.6rem;
+            }
+
+            .timeline-scrubber {
+                width: 90%;
+                bottom: 40px;
+            }
+
+            .data-points-container {
+                width: 95%;
+                height: 300px;
+            }
+        }
+
+        /* Reduce motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO SECTION (Operate.so Style) -->
+    <section class="hero-operate-style">
+        <!-- Technical grid overlay -->
+        <div class="technical-grid"></div>
+
+        <!-- Document label (top-left) -->
+        <div class="document-label">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <div style="width: 6px; height: 6px; background: var(--dark-teal); border-radius: 50%;"></div>
+                <span>ANALYTICS PLATFORM</span>
+            </div>
+            <div style="margin-left: 14px;">12.15.2025</div>
+            <div style="margin-left: 14px;">South Shore Analytics</div>
+        </div>
+
+        <!-- Alpha badge (top-right) -->
+        <div class="alpha-badge">
+            <div class="badge-dot"></div>
+            <span>10+ Years Guiding Data</span>
+        </div>
+
+        <!-- Side labels (vertical) -->
+        <div class="side-label side-label-left">Data Journey</div>
+        <div class="side-label side-label-right">South Shore Analytics</div>
+
+        <!-- Animated data points visualization -->
+        <div class="data-points-container" id="dataPointsContainer">
+            <!-- Data points will be generated by JavaScript -->
+        </div>
+
+        <!-- Decorative symbols -->
+        <div class="decorative-symbol" style="top: 15%; left: 10%;">✱</div>
+        <div class="decorative-symbol" style="top: 25%; right: 12%; animation-delay: 1s;">✱</div>
+        <div class="decorative-symbol" style="bottom: 20%; left: 15%; animation-delay: 2s;">●</div>
+        <div class="decorative-symbol" style="top: 70%; right: 18%; animation-delay: 1.5s;">●</div>
+
+        <!-- Squiggly decorative lines -->
+        <svg class="squiggle" style="top: 10%; right: 5%; width: 100px; height: 80px;">
+            <path d="M 10 40 Q 30 20, 50 40 T 90 40" stroke-linecap="round"/>
+        </svg>
+        <svg class="squiggle" style="bottom: 15%; left: 8%; width: 120px; height: 60px;">
+            <path d="M 10 30 Q 40 10, 70 30 T 110 30" stroke-linecap="round"/>
+        </svg>
+
+        <!-- Hero content (centered overlay) -->
+        <div class="hero-content-overlay">
+            <p style="color: var(--dark-teal); font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">South Shore Analytics</p>
+            <h1 style="font-size: 3.5rem; font-weight: 800; color: var(--dark-teal); line-height: 1.1; margin-bottom: 1.5rem;">
+                From Data Chaos<br>to Crystal Clarity
+            </h1>
+            <a href="#contact" class="btn-primary">
+                Early Access
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M6 3l5 5-5 5"/>
+                </svg>
+            </a>
+        </div>
+
+        <!-- Timeline scrubber (bottom) -->
+        <div class="timeline-scrubber">
+            <span class="timeline-bracket">⌊</span>
+            <span class="timeline-label">Data Chaos</span>
+            <div class="timeline-track">
+                <div class="timeline-progress" id="timelineProgress" style="width: 0%"></div>
+            </div>
+            <span class="timeline-label">Crystal Clarity</span>
+            <span class="timeline-bracket">⌋</span>
+            <button class="control-button" id="playPauseBtn" aria-label="Pause animation">
+                <svg id="pauseIcon" width="12" height="14" viewBox="0 0 12 14" fill="currentColor" style="display: block;">
+                    <rect x="0" y="0" width="4" height="14"/>
+                    <rect x="8" y="0" width="4" height="14"/>
+                </svg>
+                <svg id="playIcon" width="12" height="14" viewBox="0 0 12 14" fill="currentColor" style="display: none;">
+                    <path d="M0 0 L12 7 L0 14 Z"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Placeholder for rest of page -->
+    <section style="padding: 6rem 2rem; text-align: center; background: white;">
+        <h2 style="font-size: 2.5rem; color: var(--dark-teal); margin-bottom: 2rem;">Your Data Journey Continues...</h2>
+        <p style="color: #6B7280; font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
+            This hero section is inspired by operate.so's design aesthetic. Scroll down for services, testimonials, and contact form.
+        </p>
+    </section>
+
+    <!-- JavaScript for animation -->
+    <script>
+        // Configuration
+        const NUM_POINTS = 30;
+        const ANIMATION_DURATION = 8000; // 8 seconds
+        let animationProgress = 0;
+        let isPlaying = true;
+        let animationFrameId = null;
+
+        // Generate random data points
+        const dataPoints = [];
+        const container = document.getElementById('dataPointsContainer');
+
+        // Create data points with chaos and clarity positions
+        for (let i = 0; i < NUM_POINTS; i++) {
+            const point = document.createElement('div');
+            point.className = 'data-point';
+
+            // Random size between 8px and 40px
+            const size = Math.random() * 32 + 8;
+            point.style.width = `${size}px`;
+            point.style.height = `${size}px`;
+
+            // Chaos position (scattered on left half)
+            const chaosX = Math.random() * 45; // 0-45%
+            const chaosY = Math.random() * 100; // 0-100%
+
+            // Clarity position (organized grid on right half)
+            const row = Math.floor(i / 6);
+            const col = i % 6;
+            const clarityX = 55 + (col * 7); // 55-95%
+            const clarityY = 15 + (row * 15); // Evenly spaced rows
+
+            // Store positions
+            point.dataset.chaosX = chaosX;
+            point.dataset.chaosY = chaosY;
+            point.dataset.clarityX = clarityX;
+            point.dataset.clarityY = clarityY;
+
+            // Start in chaos position
+            point.style.left = `${chaosX}%`;
+            point.style.top = `${chaosY}%`;
+
+            // Random opacity variation
+            point.style.opacity = 0.3 + Math.random() * 0.5;
+
+            container.appendChild(point);
+            dataPoints.push(point);
+        }
+
+        // Animation loop
+        function animate() {
+            if (!isPlaying) return;
+
+            animationProgress += 16 / ANIMATION_DURATION; // 16ms frame time
+
+            if (animationProgress >= 1) {
+                animationProgress = 0; // Loop
+            }
+
+            // Easing function (ease-in-out)
+            const easeProgress = animationProgress < 0.5
+                ? 2 * animationProgress * animationProgress
+                : 1 - Math.pow(-2 * animationProgress + 2, 2) / 2;
+
+            // Update data points
+            dataPoints.forEach(point => {
+                const chaosX = parseFloat(point.dataset.chaosX);
+                const chaosY = parseFloat(point.dataset.chaosY);
+                const clarityX = parseFloat(point.dataset.clarityX);
+                const clarityY = parseFloat(point.dataset.clarityY);
+
+                // Interpolate position
+                const currentX = chaosX + (clarityX - chaosX) * easeProgress;
+                const currentY = chaosY + (clarityY - chaosY) * easeProgress;
+
+                point.style.left = `${currentX}%`;
+                point.style.top = `${currentY}%`;
+
+                // Interpolate opacity
+                const opacity = 0.3 + (0.7 * easeProgress);
+                point.style.opacity = opacity;
+            });
+
+            // Update timeline progress
+            document.getElementById('timelineProgress').style.width = `${easeProgress * 100}%`;
+
+            animationFrameId = requestAnimationFrame(animate);
+        }
+
+        // Start animation
+        animate();
+
+        // Play/Pause button
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const playIcon = document.getElementById('playIcon');
+
+        playPauseBtn.addEventListener('click', () => {
+            isPlaying = !isPlaying;
+
+            if (isPlaying) {
+                pauseIcon.style.display = 'block';
+                playIcon.style.display = 'none';
+                playPauseBtn.setAttribute('aria-label', 'Pause animation');
+                animate();
+            } else {
+                pauseIcon.style.display = 'none';
+                playIcon.style.display = 'block';
+                playPauseBtn.setAttribute('aria-label', 'Play animation');
+                if (animationFrameId) {
+                    cancelAnimationFrame(animationFrameId);
+                }
+            }
+        });
+
+        // Pause animation when user prefers reduced motion
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            isPlaying = false;
+            pauseIcon.style.display = 'none';
+            playIcon.style.display = 'block';
+            playPauseBtn.setAttribute('aria-label', 'Play animation');
+        }
+    </script>
+</body>
+</html>
